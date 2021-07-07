@@ -1,0 +1,10 @@
+#Python
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+#MacOS
+.DS_Store
+*/.DS_Store/*
+__MACOSX
+*/__MACOSX/*
+
