@@ -9,7 +9,7 @@ taken from `https://github.com/wengong-jin/icml18-jtnn` page.
 * Python (version == 2.7)
 * PyTorch (version >= 0.2)
 
-#Structure
+# Structure
 * jtnn/ - official implementation of JT VAE
 * fast_jtnn/ - speeded up version
 * qvae/ - experiments on QM9 dataset for regression and molecular reconstruction under constraints
