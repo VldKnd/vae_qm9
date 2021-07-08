@@ -1,9 +1,7 @@
 # Junction Tree Variational Autoencoder for Molecular Graph Generation
 
 Official implementation of our Junction Tree Variational Autoencoder [https://arxiv.org/abs/1802.04364](https://arxiv.org/abs/1802.04364)
-
-# Accelerated Version
-We have accelerated our code! The new code is in `fast_jtnn/`, and the VAE training script is in `fast_molvae/`. Please refer to `fast_molvae/README.md` for details.
+taken from `https://github.com/wengong-jin/icml18-jtnn` page.
 
 # Requirements
 * Linux (We only tested on Ubuntu)
@@ -11,21 +9,10 @@ We have accelerated our code! The new code is in `fast_jtnn/`, and the VAE train
 * Python (version == 2.7)
 * PyTorch (version >= 0.2)
 
-To install RDKit, please follow the instructions here [http://www.rdkit.org/docs/Install.html](http://www.rdkit.org/docs/Install.html)
-
-We highly recommend you to use conda for package management.
-
-# Quick Start
-The following directories contains the most up-to-date implementations of our model:
-* `fast_jtnn/` contains codes for model implementation.
-* `fast_molvae/` contains codes for VAE training. Please refer to `fast_molvae/README.md` for details.
-
-The following directories provides scripts for the experiments in our original ICML paper:
-* `bo/` includes scripts for Bayesian optimization experiments. Please read `bo/README.md` for details.
-* `molvae/` includes scripts for training our VAE model only. Please read `molvae/README.md` for training our VAE model.
-* `molopt/` includes scripts for jointly training our VAE and property predictors. Please read `molopt/README.md` for details.
-* `jtnn/` contains codes for model formulation.
-
+#Structure
+* jtnn/ - official implementation of JT VAE
+* fast_jtnn/ - speeded up version
+* qvae/ - experiments on QM9 dataset for regression and molecular reconstruction under constraints
 
 # Contact
-Wengong Jin (wengong@csail.mit.edu)
+Vladimir Kondratyev(kondratyev.w.i@gmail.com)
