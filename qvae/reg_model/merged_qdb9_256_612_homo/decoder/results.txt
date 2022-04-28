@@ -1,0 +1,6 @@
+Accuracy: 79.7159 %
+Loss: 217.795, KL: 831.1, Word: 99.10, Topo: 99.95, Assm: 95.73, Steo: 100.00
+
+python3 dectrain.py --train ./data/merged/train.txt --vocab ./data/merged/vocab.txt \
+--hidden 612 --depth 3 --latent 256 --batch 40 --lr 0.001 \
+--model reg_model/merged_qdb9_256_612_homo/model --save_dir reg_model/merged_qdb9_256_612_homo/decoder/
