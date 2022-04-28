@@ -22,7 +22,6 @@ The final model is saved at */model.iter-2
 
 2. Train out model with KL regularization, with constant regularization weight $beta$
 ```
-Merged data
 python3 vaetrain.py --train ./data/merged/train.txt --vocab ./data/merged/vocab.txt \
 --hidden * --depth * --latent * --batch * --lr * --beta * \
 --model path_to_pretrained_model/model.iter-2 --save_dir path_to_save_model/
@@ -37,7 +36,6 @@ python3 reconstruct.py --test ./data/merged/test.txt --vocab ./data/merged/vocab
 ```
 Parameters should match with model stored in "path_to_model" folder
 Replace `test.txt` with `valid.txt` to test the validation accuracy (for hyperparameter tuning).
-```
 ## Training Regression
 ```
  python3 regtrain.py --train ./data/merged/reg_data/train_mols.txt --train_prop ./data/merged/reg_data/train_homo.txt --vocab ./data/merged/vocab.txt \
