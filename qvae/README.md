@@ -39,133 +39,13 @@ Parameters should match with model stored in "path_to_model" folder
 Replace `test.txt` with `valid.txt` to test the validation accuracy (for hyperparameter tuning).
 ```
 ## Training Regression
-Molecule reconstruction, run  
-
 ```
- python3 regtrain.py --train ./data/merged/reg_data/train_mols.txt --train_prop ./data/reg_data/train_homo.txt --vocab ./data/zinc/vocab.txt \
- --hidden 450 --depth 3 --latent 56 --batch 40 --lr 0.0007 \
- --modelvae vae_model/paper_weights/model.final --save_dir reg_model/qdb9_zinc_paper_homo/
+ python3 regtrain.py --train ./data/merged/reg_data/train_mols.txt --train_prop ./data/merged/reg_data/train_homo.txt --vocab ./data/merged/vocab.txt \
+ --hidden * --depth * --latent * --batch * --lr * \
+ --modelvae path_to_model/model.final --save_dir path_to_save_dir/
 ```
-
 ## Testing Regression
- python3 prop_test.py --test ./data/reg_data/train_mols.txt --test_prop ./data/reg_data/train_lumo.txt --vocab ./data/zinc/vocab.txt --hidden 450 --depth 3 --latent 256 --batch 40 --modelvae vae_model/qdb9_zinc_256/model.iter-0 --save_dir reg_model/qdb9_zinc_256/model_regression.iter-0
- 
-Replace `test.txt` with `valid.txt` to test the validation accuracy (for hyperparameter tuning).
 ```
-
-1. python3 regtrain.py --train ./data/reg_data/train_mols.txt --train_prop ./data/reg_data/train_lumo.txt --vocab ./data/zinc/vocab.txt --hidden 450 --depth 3 --latent 256 --batch 40 --lr 0.0001 --lr_reg 0.0001 --modelvae vae_model/qdb9_zinc_256/model.iter-6 --save_dir reg_model/qdb9_zinc_256_lumo/
-
-python3 regtrain.py --train ./data/reg_data/train_mols.txt --train_prop ./data/reg_data/train_lumo.txt --vocab ./data/zinc/vocab.txt --hidden 450 --depth 3 --latent 256 --batch 40 --lr 0.00001 --lr_reg 0.00001 --modelvae reg_model/qdb9_zinc_256_lumo/model.final --modelreg reg_model/qdb9_zinc_256_lumo/model_regression.final --save_dir reg_model/qdb9_zinc_256_lumo/
-
-python3 prop_test.py --test ./data/reg_data/train_mols.txt --test_prop ./data/reg_data/train_lumo.txt --vocab ./data/zinc/vocab.txt --hidden 450 --depth 3 --latent 256 --batch 40 --modelvae reg_model/qdb9_zinc_256_lumo/model.final --modelreg reg_model/qdb9_zinc_256_lumo/model_regression.final
-
-2. python3 regtrain.py --train ./data/reg_data/train_mols.txt --train_prop ./data/reg_data/train_homo.txt --vocab ./data/zinc/vocab.txt --hidden 450 --depth 3 --latent 256 --batch 40 --lr 0.0001 --lr_reg 0.0001 --modelvae vae_model/qdb9_zinc_256/model.iter-6 --save_dir reg_model/qdb9_zinc_256_homo/
-
-python3 regtrain.py --train ./data/reg_data/train_mols.txt --train_prop ./data/reg_data/train_homo.txt --vocab ./data/zinc/vocab.txt --hidden 450 --depth 3 --latent 256 --batch 40 --lr 0.00001 --lr_reg 0.00001 --modelvae reg_model/qdb9_zinc_256_homo/model.final --modelreg reg_model/qdb9_zinc_256_homo/model_regression.final --save_dir reg_model/qdb9_zinc_256_homo/
-
-python3 prop_test.py --test ./data/reg_data/train_mols.txt --test_prop ./data/reg_data/train_homo.txt --vocab ./data/zinc/vocab.txt --hidden 450 --depth 3 --latent 256 --batch 40 --modelvae reg_model/qdb9_zinc_256_homo/model.final --modelreg reg_model/qdb9_zinc_256_homo/model_regression.final
-
-3. python3 regtrain.py --train ./data/reg_data/train_mols.txt --train_prop ./data/reg_data/train_homo.txt --vocab ./data/zinc/vocab.txt --hidden 450 --depth 3 --latent 56 --batch 40 --lr 0.0001 --lr_reg 0.0001 --modelvae vae_model/paper_weights/model.final --save_dir reg_model/qdb9_zinc_paper_homo/
-
-python3 regtrain.py --train ./data/reg_data/train_mols.txt --train_prop ./data/reg_data/train_homo.txt --vocab ./data/zinc/vocab.txt --hidden 450 --depth 3 --latent 56 --batch 40 --lr 0.00001 --lr_reg 0.00001 --modelvae reg_model/qdb9_zinc_paper_homo/model.final --modelreg reg_model/qdb9_zinc_paper_homo/model_regression.final --save_dir reg_model/qdb9_zinc_paper_homo/
-
-python3 prop_test.py --test ./data/reg_data/train_mols.txt --test_prop ./data/reg_data/train_homo.txt --vocab ./data/zinc/vocab.txt --hidden 450 --depth 3 --latent 56 --batch 40 --modelvae reg_model/qdb9_zinc_paper_homo/model.final --modelreg reg_model/qdb9_zinc_paper_homo/model_regression.final
-
-4. python3 regtrain.py --train ./data/reg_data/train_mols.txt --train_prop ./data/reg_data/train_homo.txt --vocab ./data/zinc/vocab.txt --hidden 450 --depth 3 --latent 56 --batch 40 --lr 0.0001 --lr_reg 0.0001 --modelvae vae_model/paper_weights/model.final --save_dir reg_model/qdb9_zinc_paper_lumo/
-
-python3 regtrain.py --train ./data/reg_data/train_mols.txt --train_prop ./data/reg_data/train_lumo.txt --vocab ./data/zinc/vocab.txt --hidden 450 --depth 3 --latent 56 --batch 40 --lr 0.00001 --lr_reg 0.00001 --modelvae reg_model/qdb9_zinc_paper_lumo/model.final --modelreg reg_model/qdb9_zinc_paper_lumo/model_regression.final --save_dir reg_model/qdb9_zinc_paper_lumo/
-
-python3 prop_test.py --test ./data/reg_data/train_mols.txt --test_prop ./data/reg_data/train_lumo.txt --vocab ./data/zinc/vocab.txt --hidden 450 --depth 3 --latent 56 --batch 40 --modelvae reg_model/qdb9_zinc_paper_lumo/model.final --modelreg reg_model/qdb9_zinc_paper_lumo/model_regression.final
-
-
-# Training VAE on zinc+qdb9 prunned
-
-python3 pretrain.py --train ./data/qdb9/prunned/qdb9+zinc/train_smiles.txt --val ./data/qdb9/prunned/qdb9+zinc/val_smiles.txt --vocab ./data/qdb9/prunned/vocab.txt \
---hidden 450 --depth 3 --latent 256 --batch 40 \
---save_dir pre_model/qdb9+zinc_prunned_256/
-
-
-python3 pretrain.py --train ./data/qdb9/prunned/qdb9/train_smiles.txt --vocab ./data/qdb9/prunned/vocab.txt \
---hidden 450 --depth 3 --latent 256 --batch 40 \
---save_dir pre_model/qdb9_prunned_256/
-
-python3 vaetrain.py --train ./data/qdb9/prunned/qdb9/train.txt --vocab ./data/qdb9/prunned/vocab.txt \
---hidden 450 --depth 3 --latent 256 --batch 40 --lr 0.0007 --beta 0.005 \
---model pre_model/qdb9_prunned_256/model.epoch-2 --save_dir vae_model/qdb9_prunned_256/
-
-
-python3 vaetrain.py --train ./data/qdb9/prunned/qdb9+zinc/train.txt --vocab ./data/qdb9/prunned/vocab.txt \
---hidden 450 --depth 3 --latent 256 --batch 40 --lr 0.0007 --beta 0.005 \
---model pre_model/qdb9+zinc_prunned_256/model --save_dir vae_model/qdb9_zinc_prunned_256/
-
-
-
-# Testing VAE on qdb9 prunned
-
-python3 reconstruct.py --train ./data/qdb9/prunned/qdb9+zinc/test.txt --vocab ./data/qdb9/prunned/vocab.txt \
---hidden 450 --depth 3 --latent 256 \
---model vae_model/qdb9_prunned_256/model.iter-6
-
-# Training regression on qdb9 prunned
-
-python3 regtrain.py --train ./data/qdb9/prunned/qdb9/train_smiles.txt --train_prop ./data/qdb9/prunned/qdb9/train_lumo.txt --vocab ./data/qdb9/prunned/vocab.txt --hidden 450 --depth 3 --latent 256 --batch 256 --lr 0.01 --lr_reg 0.1 --modelvae vae_model/qdb9_prunned_256/model.epoch-6 --save_dir reg_model/qdb9_prunned_256_lumo
-
-python3 regtrain.py --train ./data/qdb9/prunned/qdb9/train_smiles.txt --train_prop ./data/qdb9/prunned/qdb9/train_homo.txt --vocab ./data/qdb9/prunned/vocab.txt --hidden 450 --depth 3 --latent 256 --batch 256 --lr 0.01 --lr_reg 0.1 --modelvae vae_model/qdb9_prunned_256/model.epoch-6 --save_dir reg_model/qdb9_prunned_256_lumo
-
-python3 regtrain.py --train ./data/qdb9/prunned/qdb9/train_smiles.txt --train_prop ./data/qdb9/prunned/qdb9/train_lumo.txt --vocab ./data/qdb9/prunned/vocab.txt --hidden 450 --depth 3 --latent 256 --batch 256 --lr 0.01 --lr_reg 0.1 --modelvae vae_model/qdb9_zinc_prunned_256/model.epoch-6 --save_dir reg_model/qdb9_zinc_prunned_256_lumo
-
-python3 regtrain.py --train ./data/qdb9/prunned/qdb9/train_smiles.txt --train_prop ./data/qdb9/prunned/qdb9/train_homo.txt --vocab ./data/qdb9/prunned/vocab.txt --hidden 450 --depth 3 --latent 256 --batch 256 --lr 0.01 --lr_reg 0.1 --modelvae vae_model/qdb9_zinc_prunned_256/model.epoch-6 --save_dir reg_model/qdb9_zinc_prunned_256_homo
-
-# Testing regression on qdb9 prunned
-
-python3 prop_test.py --test ./data/qdb9/prunned/qdb9/test_smiles.txt --test_prop ./data/qdb9/prunned/qdb9/test_lumo.txt --vocab ./data/qdb9/prunned/vocab.txt --hidden 450 --depth 3 --latent 256 --batch 40 --modelvae vae_model/qdb9_prunned_256/model.epoch-6 --modelreg reg_model/qdb9_prunned_256_lumo/model_regression
-
-python3 prop_test.py --test ./data/qdb9/prunned/qdb9/test_smiles.txt --test_prop ./data/qdb9/prunned/qdb9/test_homo.txt --vocab ./data/qdb9/prunned/vocab.txt --hidden 450 --depth 3 --latent 256 --batch 40 --modelvae vae_model/qdb9_prunned_256/model.epoch-6 --modelreg reg_model/qdb9_prunned_256_homo/model_regression
-
-python3 prop_test.py --test ./data/qdb9/prunned/qdb9/test_smiles.txt --test_prop ./data/qdb9/prunned/qdb9/test_homo.txt --vocab ./data/qdb9/prunned/vocab.txt --hidden 450 --depth 3 --latent 256 --batch 40 --modelvae vae_model/qdb9_zinc_prunned_256/model.epoch-6 --modelreg reg_model/qdb9_zinc_prunned_256_homo/model_regression
-
-python3 prop_test.py --test ./data/qdb9/prunned/qdb9/test_smiles.txt --test_prop ./data/qdb9/prunned/qdb9/test_lumo.txt --vocab ./data/qdb9/prunned/vocab.txt --hidden 450 --depth 3 --latent 256 --batch 40 --modelvae vae_model/qdb9_zinc_prunned_256/model.epoch-6 --modelreg reg_model/qdb9_zinc_prunned_256_lumo/model_regression
-
-# Testing reconstruction
-
-python reconstruct.py --test ./data/merged/test.txt --vocab ./data/merged/vocab.txt \
---hidden 612 --depth 3 --latent 256 \
---model vae_model/merged_qdb9_256_612/model
-
-
-python3 vaetrain.py --train ./data/merged/train.txt --vocab ./data/merged/vocab.txt \
---hidden 612 --depth 3 --latent 256 --batch 40 --lr 0.0007 --beta 0.005 \
---model pre_model/merged_qdb9_256_612/model.iter-2 --save_dir vae_model/merged_qdb9_256_612/
-
-python reconstruct.py --test ./data/qdb9/prunned/qdb9/test_smiles.txt --vocab ./data/qdb9/prunned/vocab.txt \
---hidden 450 --depth 3 --latent 256 \
---model vae_model/qdb9_prunned_256/model
-
-python reconstruct.py --test ./data/qdb9/prunned/qdb9/test_smiles.txt --vocab ./data/qdb9/prunned/vocab.txt \
---hidden 450 --depth 3 --latent 256 \
---model pre_model/qdb9+zinc_prunned_256/model
-
-python reconstruct.py --test ./data/qdb9/prunned/qdb9/test_smiles.txt --vocab ./data/qdb9/prunned/vocab.txt \
---hidden 450 --depth 3 --latent 256 \
---model pre_model/qdb9_prunned_256/model
-
-# Finetunning decoder
-
-python3 vaetrain.py --train "path to the training txt with molecules" --vocab "path to vocab txt with vocab" \
---hidden ?? --depth ?? --latent ?? --batch ?? --lr ?? --beta ?? \
---model "path to pretrained for regression model" --save_dir "path to save finally trained model"
-
-Examples:
-python3 dectrain.py --train ./data/merged/train.txt --vocab ./data/merged/vocab.txt \
---hidden 612 --depth 3 --latent 256 --batch 40 --lr 0.001 \
---model reg_model/merged_qdb9_256_612_homo/model --save_dir reg_model/merged_qdb9_256_612_homo/decoder/
-
-
-python3 dectrain.py --train ./data/merged/train.txt --vocab ./data/merged/vocab.txt \
---hidden 612 --depth 3 --latent 256 --batch 40 --lr 0.001\
---model reg_model/merged_qdb9_256_612_lumo/model --save_dir reg_model/merged_qdb9_256_612_lumo/decoder/
-
-
-python3 dectrain.py --train ./data/merged/train.txt --vocab ./data/merged/vocab.txt \
---hidden 612 --depth 3 --latent 256 --batch 40 --lr 0.001\
---model reg_model/merged_qdb9_256_612_gap/model --save_dir reg_model/merged_qdb9_256_612_gap/decoder/
+ python3 prop_test.py --test ./data/merged/reg_data/train_mols.txt --test_prop ./data/merged/reg_data/train_lumo.txt --vocab ./data/merged/vocab.txt --hidden * --depth * --latent * --batch * --modelvae path_to_model/model.final --save_dir path_to_saved_regression_head/model_regression.iter-0
+```
+Replace `test.txt` with `valid.txt` to test the validation accuracy (for hyperparameter tuning).
