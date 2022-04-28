@@ -7,77 +7,42 @@ Our ZINC dataset is in `icml18-jtnn/data/zinc` (copied from https://github.com/m
 We follow the same train/dev/test split as previous work. 
 
 ## Deriving Vocabulary 
-Vocabulary is stored in data/vocab.txt
+Vocabulary is stored in data/merged/vocab.txt
 
 ## Training
 We trained VAE model in two phases:
 1. Training without KL regularization term.
 Pretrain our model as follows (with hidden state dimension=450, latent code dimension=56, graph message passing depth=3):
 ```
-ZINC
-python3 pretrain.py --train ./data/zinc/train.txt --vocab ./data/vocab.txt \
---hidden 450 --depth 3 --latent 256 --batch 40 \
---save_dir pre_model/zinc_256/
-
-QDB9
-python3 pretrain.py --train ./data/qdb9/train.txt --vocab ./data/vocab.txt \
---hidden 612 --depth 3 --latent 256 --batch 40 \
---save_dir pre_model/qdb9_256_612/
-
-Merged data
 python3 pretrain.py --train ./data/merged/train.txt --vocab ./data/merged/vocab.txt \
---hidden 612 --depth 3 --latent 256 --batch 40 \
---save_dir pre_model/merged_qdb9_256_612/
+--hidden * --depth * --latent * --batch * \
+--save_dir *
 ```
-The final model is saved at pre_model/zinc/model.iter-2
+The final model is saved at */model.iter-2
 
 2. Train out model with KL regularization, with constant regularization weight $beta$
 ```
-ZINC
-python3 vaetrain.py --train ./data/zinc/train.txt --vocab ./data/vocab.txt \
---hidden 450 --depth 3 --latent 256 --batch 40 --lr 0.0007 --beta 0.005 \
---model pre_model/zinc_256/model.iter-2 --save_dir vae_model/zinc_256/
-
-QDB9
-python3 vaetrain.py --train ./data/qdb9/train.txt --vocab ./data/vocab.txt \
---hidden 612 --depth 3 --latent 256 --batch 40 --lr 0.0007 --beta 0.005 \
---model pre_model/qdb9_256_612/model.iter-2 --save_dir vae_model/qdb9_256_612/
-
 Merged data
 python3 vaetrain.py --train ./data/merged/train.txt --vocab ./data/merged/vocab.txt \
---hidden 612 --depth 3 --latent 256 --batch 40 --lr 0.0007 --beta 0.005 \
---model pre_model/merged_qdb9_256_612/model.iter-2 --save_dir vae_model/merged_qdb9_256_612/
+--hidden * --depth * --latent * --batch * --lr * --beta * \
+--model path_to_pretrained_model/model.iter-2 --save_dir path_to_save_model/
 ```
-
-
 
 ## Testing
 Molecule reconstruction, run  
 ```
-python3 reconstruct.py --test ./data/zinc/test.txt --vocab ./data/vocab.txt \
---hidden 450 --depth 3 --latent 56 \
---model vae_model/zinc/model.iter-6
+python3 reconstruct.py --test ./data/merged/test.txt --vocab ./data/merged/vocab.txt \
+--hidden * --depth * --latent * \
+--model path_to_model/model.iter-6
 ```
-
-```
-python3 reconstruct.py --test ./data/qdb9/test.txt --vocab ./data/vocab.txt \
---hidden 612 --depth 3 --latent 256 \
---model vae_model/qdb9_256_612_0.00007/model.iter-6
-```
-
-```
-python reconstruct.py --test ./data/qdb9/new_qdb9/test_intersect_zinc.txt --vocab ./data/zinc/vocab.txt \
---hidden 450 --depth 3 --latent 256 \
---model vae_model/qdb9_zinc_256/model.iter-6-2000
-```
-
+Parameters should match with model stored in "path_to_model" folder
 Replace `test.txt` with `valid.txt` to test the validation accuracy (for hyperparameter tuning).
 ```
 ## Training Regression
 Molecule reconstruction, run  
 
 ```
- python3 regtrain.py --train ./data/reg_data/train_mols.txt --train_prop ./data/reg_data/train_homo.txt --vocab ./data/zinc/vocab.txt \
+ python3 regtrain.py --train ./data/merged/reg_data/train_mols.txt --train_prop ./data/reg_data/train_homo.txt --vocab ./data/zinc/vocab.txt \
  --hidden 450 --depth 3 --latent 56 --batch 40 --lr 0.0007 \
  --modelvae vae_model/paper_weights/model.final --save_dir reg_model/qdb9_zinc_paper_homo/
 ```
