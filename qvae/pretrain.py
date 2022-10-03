@@ -90,24 +90,11 @@ for epoch in range(MAX_EPOCH):
 
 
             if (it + 1) % PRINT_ITER == 0:
-#                acc = 0
-#                tot = 0
-                
                 wloss =  wloss / PRINT_ITER * 100
                 word_acc = word_acc / PRINT_ITER * 100
                 topo_acc = topo_acc / PRINT_ITER * 100
                 assm_acc = assm_acc / PRINT_ITER * 100
                 steo_acc = steo_acc / PRINT_ITER * 100
-                
-#                for smiles in validation[:1]:
-#                    mol = rdkit.Chem.MolFromSmiles(smiles)
-#                    smiles3D = rdkit.Chem.MolToSmiles(mol, isomericSmiles=True)
-
-#                    dec_smiles = model.reconstruct(smiles3D)
-#                    if dec_smiles == smiles3D:
-#                        acc += 1
-#                    tot += 1
-#                    print(tot)
 
                 verbose_df = verbose_df.append(pd.Series([it,
                                                           wloss,
