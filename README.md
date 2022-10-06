@@ -44,30 +44,37 @@ unfrozen encoder (pretrained during the basic JT VAE training) jointly with two 
 ```
 * Linux (We only tested on Ubuntu)
 * RDKit (version >= 2017.09)
-* Python (version == 2.7)
-* PyTorch (version >= 0.2)
+* Python (version >= 3.8)
 ```
 # Structure:
 ```
 .
-├── jtnn                ### Implementation of JT VAE
-│   └── **              ### For further detail consult the original github https://github.com/wengong-jin/icml18-jtnn.
-├── fast_jtnn           ### Speeded up version
+├── jtnn                   ### Implementation of JT VAE
+│   └── **                 ### For further detail consult the original github https://github.com/wengong-jin/icml18-jtnn.
+│
+├── fast_jtnn              ### Speeded up version
 │   └── ** 
+│ 
 ├── qvae ## For More information go to qvae/README.md
+│   │ 
 │   ├── data
-│   │     ├── merged        ### Folder with mixed QM9 and ZINC smiles.
-│   │     └── reg_data      ### Folder with QM9 smiles and its homo/lumo/gap values.
+│   │     ├── merged       ### Folder with mixed QM9 and ZINC smiles.
+│   │     └── reg_data     ### Folder with QM9 smiles and its homo/lumo/gap values.
 │   │ 
-│   ├── enc_model        ### Empty folder made for conviniance of training.
-│   ├── var_model        ### Empty folder made for conviniance of training.
-│   ├── reg_model        ### Folder with pre-train weights for the model.
-│   │     └── merged_*       ### Different pretrained models
+│   ├── enc_model          ### Empty folder made for conviniance of training.
+│   ├── var_model          ### Empty folder made for conviniance of training.
+│   ├── reg_model          ### Folder with pre-train weights for the model.
+│   │     └── merged_*     ### Different pretrained models
 │   │ 
-│   ├── pretrain.py       ### Script for training Auto-Encoder JT-VAE without KL divergence penalty.
-│   ├── vaetrain.py       ### Script for VAE training.
-│   ├── regtrain.py       ### Script for training the regression head.
-│   ├── dectrain.py       ### Script for finetunning the decoder of the model.
+│   ├── mol_gen            ### Folder with scripts to generate molecules with gradient descent.
+│   │     ├── ctv.py       ### Closest by target value to MIX dataset generation.
+│   │     ├── gauss.py     ### Generation from random vectors.
+│   │     └── funcs.py     ### Additional functions.
+│   │ 
+│   ├── pretrain.py        ### Script for training Auto-Encoder JT-VAE without KL divergence penalty.
+│   ├── vaetrain.py        ### Script for VAE training.
+│   ├── regtrain.py        ### Script for training the regression head.
+│   ├── dectrain.py        ### Script for finetunning the decoder of the model.
 │   │ 
 │   ├── reconstruct.py     ### Script for testing the reconstruction accuracy of the model. 
 │   └── prop_test.py       ### Script for testing the MAE accuracy of the regressor.
